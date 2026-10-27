@@ -73,6 +73,7 @@ dependencies = [
     { name = "httpx" },
     { name = "mcp", extra = ["cli"] },
     { name = "prompt-toolkit" },
+    { name = "pypdf" },
     { name = "python-dotenv" },
 ]
 
@@ -86,6 +87,7 @@ requires-dist = [
     { name = "httpx", specifier = "==0.28.1" },
     { name = "mcp", extras = ["cli"], specifier = ">=1.8.0" },
     { name = "prompt-toolkit", specifier = ">=3.0.51" },
+    { name = "pypdf", specifier = "==4.0" },
     { name = "python-dotenv", specifier = ">=1.1.0" },
 ]
 
@@ -940,6 +942,15 @@ wheels = [
 [package.optional-dependencies]
 crypto = [
     { name = "cryptography" },
+]
+
+[[package]]
+name = "pypdf"
+version = "4.0.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/f3/45/4f11b5e94a670296de8813814d548f9dc2e148bcd6c3a859849b6075f581/pypdf-4.0.0.tar.gz", hash = "sha256:637de66382238f3537fcf8f27fdb47e2c99dd5aa6de173a28a5b737f9a784973", size = 280009, upload-time = "2024-01-19T13:28:42.699Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/12/cd/12fa4ca4262f78a984ba9cce95be824e9ce7f9dbcc1529ff4966591caef6/pypdf-4.0.0-py3-none-any.whl", hash = "sha256:071d837f9d109c260cc70b026d3ffad3db6f905131b51f39fe74f2fa435ea003", size = 283921, upload-time = "2024-01-19T13:28:40.033Z" },
 ]
 
 [[package]]

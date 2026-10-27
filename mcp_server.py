@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from pypdf import PdfReader
 
 from mcp.server.mcpserver import MCPServer
 from mcp.server.mcpserver.prompts import base
@@ -7,8 +8,36 @@ from pydantic import Field
 
 mcp = MCPServer("Mandala_Chart", log_level="ERROR")
 
+NOTES_DIR = (Path.home() / "Documents" / "notes").resolve()
+
 DOCS_DIR = Path(__file__).parent / "docs"
 DOCS_DIR.mkdir(exist_ok=True)
+
+@mcp.tool(
+    name="read_notes",
+    description="Reads the content of notes that the user wrote in order to know him better."
+)
+def read_notes(
+    path: str = Field(description="Path of the file containing the notes that are relevant to the user.")
+):
+    full = (NOTES_DIR / path).resolve()
+    if not full.is_relative_to(NOTES_DIR):
+        raise ValueError(f"Path is outside a 'notes' folder")
+
+    if path.endswith(".txt"):
+        try:
+            with open(full, "r") as file:
+                content = file.read()
+                return content
+        except Exception:
+            raise ValueError(f"File not found")
+    elif path.endswith(".pdf"):
+        try:
+            reader = PdfReader(full)
+            return "\n".join(page.extract_text() for page in reader.pages)
+        except Exception:
+            raise ValueError(f"File not found")
+
 
 @mcp.resource("docs://documents", mime_type="application/json")
 def list_documents() -> str:

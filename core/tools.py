@@ -18,7 +18,7 @@ class ToolManager:
                     "function": {
                         "name": t.name,
                         "description": t.description,
-                        "parameters": t.inputSchema,
+                        "parameters": t.input_schema,
                     },
                 }
                 for t in tool_models
